@@ -1,4 +1,4 @@
-import { useContext, useState, createContext, useEffect, useRef } from "react";
+import { useContext, useState, createContext, useEffect } from "react";
 import { createTree } from "../utils/binaryTree";
 const context = createContext();
 
