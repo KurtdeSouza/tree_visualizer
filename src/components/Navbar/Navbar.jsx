@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { useParams } from "../../context/context";
-import Node from "../Node/Node";
 import { addNode, createTree } from "../../utils/binaryTree";
 
 export default function Navbar() {
   const {
-    nodeArray,
-    setNodeArray,
     algo,
     bst,
     setBST,
@@ -29,8 +26,6 @@ export default function Navbar() {
     } else {
       setBST(addNode(bst, number));
     }
-    let n = Node(number);
-    setNodeArray([...nodeArray, n]);
 
     setTemp("");
   }

@@ -133,3 +133,42 @@ export function inOrder(bst) {
   let root = getRootNode(bst);
   console.log(root.value);
 }
+export function getLevelOrder(bst) {
+  var queue = [];
+  if (bst == null) {
+    console.log("root is null");
+    return null;
+  }
+
+  var root = getRootNode(bst);
+  console.log(root.value);
+  queue.push([root, 0]);
+  const levels = {
+    0: [root.val],
+  };
+
+  while (queue.length != 0) {
+    // The shift() method removes
+    // the first element from an array
+    // and returns that removed element.
+    var data = queue.shift();
+    var tempNode = data[0];
+    var level = data[1];
+    if (!(level + 1 in levels)) {
+      levels[level + 1] = [];
+    }
+    if (tempNode.left != null) {
+      queue.push([tempNode.left, level + 1]);
+      levels[level + 1].push(tempNode.left.value);
+    } else {
+      levels[level + 1].push(null);
+    }
+    if (tempNode.right != null) {
+      queue.push([tempNode.right, level + 1]);
+      levels[level + 1].push(tempNode.right.value);
+    } else {
+      levels[level + 1].push(null);
+    }
+  }
+  return levels;
+}
