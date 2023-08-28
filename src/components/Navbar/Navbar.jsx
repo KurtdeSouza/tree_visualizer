@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { useParams } from "../../context/context";
-import { addNode, createTree } from "../../utils/binaryTree";
+import { addNode } from "../../utils/binaryTree";
 
 export default function Navbar() {
-  const {
+  var {
     algo,
     bst,
     setBST,
@@ -21,15 +21,11 @@ export default function Navbar() {
     setTemp(event.target.value);
   };
   function newNode(number) {
-    if (bst === null) {
-      setBST(createTree(number));
-    } else {
-      setBST(addNode(bst, number));
-    }
+    var tree = addNode(bst, number);
 
     setTemp("");
+    return tree;
   }
-
   return (
     <div className="navbar">
       <div className="container">
@@ -43,10 +39,8 @@ export default function Navbar() {
           />
           <button
             onClick={() => {
-              if (temp == "") {
-                console.log("here");
-              } else {
-                newNode(temp);
+              if (temp != "") {
+                setBST(newNode(temp));
               }
             }}
           >

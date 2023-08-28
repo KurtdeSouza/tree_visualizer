@@ -93,38 +93,18 @@ class binarySearchTree {
     }
     return root;
   }
-  printTree(root, space) {
-    if (root === null) {
-      return null;
-    }
-    space += 5;
-    this.printTree(root.right, space);
-    let spacing = space - 5;
-    console.log(" ".repeat(spacing));
-    console.log(root.value);
-    this.printTree(root.left, space);
-  }
 }
 export function addNode(BST, node) {
-  BST.insert(node);
-  return BST;
-}
-export function createRandomTree(min, max, nodeLength) {
-  var BST = new binarySearchTree();
-  for (let i = 0; i < nodeLength; i++) {
-    BST.insert(Math.floor(Math.random() * (max - min) + min));
+  if (BST == null) {
+    BST.root = new Node(node);
+  } else {
+    BST.insert(node);
   }
-  //var root = BST.getRootNode();
-  //BST.printTree(root, 0);
-
   return BST;
 }
 
-export function createTree(node) {
-  var BST = new binarySearchTree();
-  BST.insert(node);
-
-  return BST;
+export function createTree() {
+  return new binarySearchTree();
 }
 export function getRootNode(BST) {
   return BST.root;
@@ -141,10 +121,9 @@ export function getLevelOrder(bst) {
   }
 
   var root = getRootNode(bst);
-  console.log(root.value);
   queue.push([root, 0]);
-  const levels = {
-    0: [root.val],
+  var levels = {
+    0: [root.value],
   };
 
   while (queue.length != 0) {
@@ -161,13 +140,13 @@ export function getLevelOrder(bst) {
       queue.push([tempNode.left, level + 1]);
       levels[level + 1].push(tempNode.left.value);
     } else {
-      levels[level + 1].push(null);
+      levels[level + 1].push("Null");
     }
     if (tempNode.right != null) {
       queue.push([tempNode.right, level + 1]);
       levels[level + 1].push(tempNode.right.value);
     } else {
-      levels[level + 1].push(null);
+      levels[level + 1].push("Null");
     }
   }
   return levels;

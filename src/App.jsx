@@ -5,11 +5,13 @@ import { useParams } from "./context/context";
 
 function App() {
   console.log(useParams());
-
+  console.log("here");
   return (
     <div className="App">
       <Navbar></Navbar>
+      <p>here</p>
       <Tree></Tree>
+      <p>here</p>
     </div>
   );
 }

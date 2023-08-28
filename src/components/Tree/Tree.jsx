@@ -2,26 +2,32 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Tree.css";
 import { useParams } from "../../context/context";
 import Node from "../Node/Node";
-import Level from "../Level/Level";
+import Levels from "../Levels/Levels";
 
-import { addNode, inOrder, getLevelOrder } from "../../utils/binaryTree";
+import {
+  addNode,
+  inOrder,
+  getLevelOrder,
+  getRootNode,
+} from "../../utils/binaryTree";
 //import Node from "../Node/Node";
 
 export default function Tree() {
-  const { bst, nodeArray, setNodeArray } = useParams();
-  //let n = Node(number);
-  const nodes = getLevelOrder(bst);
-  console.log(nodes);
-  if (nodes == null || nodes[0] == null) {
+  console.log("hereeee");
+  const { bst } = useParams();
+  if (bst == null || getRootNode(bst) == null) {
+    console.log("Tree");
     return;
   }
-  for (var key in nodes) {
-    const l = [];
-    console.log(nodes[key].length);
-    for (var i = 0; i < nodes[key].length; i++) {
-      l.push(Node(nodes[key][i]));
+  const tree = getLevelOrder(bst);
+  var Tree = [];
+  for (var key in tree) {
+    const level = [];
+    for (var i = 0; i < tree[key].length; i++) {
+      level.push(Node(tree[key][i], i));
     }
-    setNodeArray([...nodeArray, Level(l, key)]);
+    Tree.push(level);
   }
-  return <div className="tree">{nodeArray}</div>;
+
+  return <div className="tree">{Tree}</div>;
 }

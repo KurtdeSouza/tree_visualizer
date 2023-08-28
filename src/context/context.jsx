@@ -7,11 +7,10 @@ export const useParams = () => {
 };
 
 export const ParamsProvider = ({ children }) => {
-  const [nodeArray, setNodeArray] = useState([]);
   const [mode, setMode] = useState("");
   const [treeType, setTreeType] = useState("");
   const [run, setRun] = useState(false);
-  const [bst, setBST] = useState(null);
+  const [bst, setBST] = useState(createTree());
   const [res, setRes] = useState(false);
   const [algo, setAlgo] = useState("");
 
@@ -20,15 +19,13 @@ export const ParamsProvider = ({ children }) => {
   }, [res]);
 
   function restart() {
-    setBST(null);
+    setBST(createTree());
   }
 
   return (
     <div>
       <context.Provider
         value={{
-          nodeArray,
-          setNodeArray,
           algo,
           setAlgo,
           mode,
