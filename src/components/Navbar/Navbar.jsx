@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { useParams } from "../../context/context";
-import { addNode } from "../../utils/binaryTree";
-
+import { addNode, createTree } from "../../utils/binaryTree";
+import Tree from "../Tree/Tree";
 export default function Navbar() {
-  var {
+  let {
     algo,
     bst,
     setBST,
@@ -15,32 +15,31 @@ export default function Navbar() {
     setTreeType,
     setRes,
     setRun,
+    newnode,
+    setNewNode,
   } = useParams();
-  const [temp, setTemp] = useState("");
-  const handleChange = (event) => {
-    setTemp(event.target.value);
-  };
-  function newNode(number) {
-    var tree = addNode(bst, number);
+  let [temp, setTemp] = useState("");
 
-    setTemp("");
-    return tree;
-  }
   return (
     <div className="navbar">
       <div className="container">
         <div>
           <input
-            type="text"
-            id="nodeNumber"
-            name="nodeNumber"
+            className="text"
             value={temp}
-            onChange={handleChange}
+            onChange={(e) => {
+              setTemp(e.target.value);
+            }}
           />
           <button
+            className="node"
             onClick={() => {
               if (temp != "") {
-                setBST(newNode(temp));
+                setBST(addNode(bst, temp));
+                setNewNode((old) => {
+                  return !old;
+                });
+                setTemp("");
               }
             }}
           >
@@ -102,6 +101,7 @@ export default function Navbar() {
           type="button"
           className="btn btn-primary"
           onClick={() => {
+            setBST(createTree());
             setRes((old) => {
               return !old;
             });
